@@ -13,15 +13,40 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        $admin = Admin::where('username', 'superadmin')->first();
+        // Reporting => Reviving => Approval => Accepting
 
+        //SuperAdmin
+        $SuperAdmin = Admin::where('username', 'superAdmin')->first();
+        if (is_null($SuperAdmin)) {
+            $SuperAdmin           = new Admin();
+            $SuperAdmin->name     = "Super Admin";
+            $SuperAdmin->email    = "superAdmin@roles.com";
+            $SuperAdmin->username = "superAdmin";
+            $SuperAdmin->password = Hash::make('admin@125');
+            $SuperAdmin->save();
+        }
+
+        //MasterAdmin OR Approval/Accepting Authority
+        $MasterAdmin = Admin::where('username', 'masterAdmin')->first();
+        if (is_null($MasterAdmin)) {
+            $MasterAdmin           = new Admin();
+            $MasterAdmin->name     = "Master Admin";
+            $MasterAdmin->email    = "masterAdmin@roles.com";
+            $MasterAdmin->username = "masterAdmin";
+            $MasterAdmin->password = Hash::make('admin@125');
+            $MasterAdmin->save();
+        }
+
+        //Admin OR Reporting/Reviving Authority
+        $admin = Admin::where('username', 'admin')->first();
         if (is_null($admin)) {
             $admin           = new Admin();
-            $admin->name     = "Super Admin";
-            $admin->email    = "superadmin@example.com";
-            $admin->username = "superadmin";
-            $admin->password = Hash::make('12345678');
+            $admin->name     = "Admin";
+            $admin->email    = "admin@roles.com";
+            $admin->username = "admin";
+            $admin->password = Hash::make('admin@125');
             $admin->save();
         }
+
     }
 }

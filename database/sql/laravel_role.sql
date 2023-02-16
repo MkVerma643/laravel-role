@@ -44,10 +44,10 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `name`, `email`, `username`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Super Admin', 'superadmin@example.com', 'superadmin', NULL, '$2y$10$04D4VxiS5fbr8ll6towqjeTK21rP8MHxERjgpTeES5rdLD0c9bIsi', NULL, '2020-09-11 22:33:43', '2020-09-11 22:33:43'),
-(2, 'Admin', 'admin@gmail.com', 'admin', NULL, '$2y$10$.7HeNIXmdognq7i3eQ8YzOg/EXqzrJsSB0BqfXQBa8iB86JClmCs2', NULL, '2020-09-20 10:35:35', '2020-09-20 10:35:35'),
-(3, 'Client', 'client@example.com', 'client', NULL, '$2y$10$Nf4rahrK4DohTyAPdJWGeuEHddulfF0D3bANvI9mLNT7svLT88Pge', NULL, '2020-09-20 10:45:00', '2020-09-20 10:45:00'),
-(4, 'Test Admin', 'test@gmail.com', 'test', NULL, '$2y$10$i8mt.IzUxq9mq/3euOJ8E.CF7gprJCVNyV.mR8Vdn2LQgcLo/8kCi', NULL, '2020-09-25 13:18:32', '2020-09-25 13:18:32');
+(1, 'Super Admin', 'mukesh@superadmin.com', 'superadmin', NULL, '$2y$10$04D4VxiS5fbr8ll6towqjeTK21rP8MHxERjgpTeES5rdLD0c9bIsi', NULL, '2020-09-11 22:33:43', '2020-09-11 22:33:43'),
+(2, 'Admin', 'mukesh@admin.com', 'admin', NULL, '$2y$10$.7HeNIXmdognq7i3eQ8YzOg/EXqzrJsSB0BqfXQBa8iB86JClmCs2', NULL, '2020-09-20 10:35:35', '2020-09-20 10:35:35'),
+(3, 'Client', 'client@gmail.com', 'client', NULL, '$2y$10$Nf4rahrK4DohTyAPdJWGeuEHddulfF0D3bANvI9mLNT7svLT88Pge', NULL, '2020-09-20 10:45:00', '2020-09-20 10:45:00'),
+(4, 'Test Admin', 'test@admin.com', 'test', NULL, '$2y$10$i8mt.IzUxq9mq/3euOJ8E.CF7gprJCVNyV.mR8Vdn2LQgcLo/8kCi', NULL, '2020-09-25 13:18:32', '2020-09-25 13:18:32');
 
 -- --------------------------------------------------------
 
@@ -164,17 +164,22 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `group_name`, `created_at
 (6, 'blog.delete', 'admin', 'blog', '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
 (7, 'blog.approve', 'admin', 'blog', '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
 (8, 'admin.create', 'admin', 'admin', '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
-(9, 'admin.view', 'admin', 'admin', '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
-(10, 'admin.edit', 'admin', 'admin', '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
-(11, 'admin.delete', 'admin', 'admin', '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
-(12, 'admin.approve', 'admin', 'admin', '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
-(13, 'role.create', 'admin', 'role', '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
-(14, 'role.view', 'admin', 'role', '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
-(15, 'role.edit', 'admin', 'role', '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
-(16, 'role.delete', 'admin', 'role', '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
-(17, 'role.approve', 'admin', 'role', '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
-(18, 'profile.view', 'admin', 'profile', '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
-(19, 'profile.edit', 'admin', 'profile', '2020-07-25 10:43:33', '2020-07-25 10:43:33');
+(9, 'user.view', 'user', 'admin', '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
+(10, 'user.edit', 'user', 'admin', '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
+(11, 'user.delete', 'user', 'admin', '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
+(12, 'user.approve', 'user', 'admin', '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
+(13, 'user.create', 'user', 'admin', '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
+(14, 'admin.view', 'admin', 'admin', '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
+(15, 'admin.edit', 'admin', 'admin', '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
+(16, 'admin.delete', 'admin', 'admin', '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
+(17, 'admin.approve', 'admin', 'admin', '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
+(18, 'role.create', 'admin', 'role', '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
+(19, 'role.view', 'admin', 'role', '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
+(20, 'role.edit', 'admin', 'role', '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
+(21, 'role.delete', 'admin', 'role', '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
+(22, 'role.approve', 'admin', 'role', '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
+(23, 'profile.view', 'admin', 'profile', '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
+(24, 'profile.edit', 'admin', 'profile', '2020-07-25 10:43:33', '2020-07-25 10:43:33');
 
 -- --------------------------------------------------------
 
@@ -195,7 +200,7 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'superadmin', 'admin', '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
+(1, 'SuperAdmin', 'admin', '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
 (6, 'Admin', 'admin', '2020-08-13 09:44:25', '2020-08-14 02:10:53'),
 (7, 'Client', 'admin', '2020-09-20 10:44:27', '2020-09-20 10:44:27'),
 (8, 'Test Role', 'admin', '2020-09-25 13:17:53', '2020-09-25 13:17:53');
