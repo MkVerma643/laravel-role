@@ -67,6 +67,17 @@ class RolePermissionSeeder extends Seeder
                 ]
             ],
             [
+                'group_name' => 'user',
+                'permissions' => [
+                    // admin Permissions
+                    'user.create',
+                    'user.view',
+                    'user.edit',
+                    'user.delete',
+                    'user.approve',
+                ]
+            ],
+            [
                 'group_name' => 'role',
                 'permissions' => [
                     // role Permissions
