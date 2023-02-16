@@ -278,7 +278,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Maniruzzaman Akash', 'manirujjamanakash@gmail.com', NULL, '$2y$10$/WuShlzx6A2xlSdg521Uj./pHpEGB04rB/toeltFTQQnFsR6MY/eG', NULL, '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
+(1, 'Mukesh Verma', 'Mukesh@gmail.com', NULL, '$2y$10$/WuShlzx6A2xlSdg521Uj./pHpEGB04rB/toeltFTQQnFsR6MY/eG', NULL, '2020-07-25 10:43:33', '2020-07-25 10:43:33'),
 (3, 'test2', 'admin@akijfood.com', NULL, '$2y$10$/4YK7i2fVqdTfm0WAJM3lOnApbJx4w9vxUBZyjN3HqBTnV0zmcwO.', NULL, '2020-08-14 02:28:22', '2020-08-14 03:07:31');
 
 --
