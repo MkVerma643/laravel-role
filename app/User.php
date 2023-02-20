@@ -12,6 +12,8 @@ class User extends Authenticatable
 {
     use Notifiable, HasRoles;
 
+    protected $guard_name = 'user';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -20,8 +22,6 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password',
     ];
-
-    protected $guard_name = 'admin';
 
     /**
      * The attributes that should be hidden for arrays.

@@ -13,12 +13,13 @@ use Spatie\Permission\Models\Permission;
 class RolesController extends Controller
 {
     public $user;
-
+    public $usregularUserer;
 
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
             $this->user = Auth::guard('admin')->user();
+            $this->regularUser = Auth::guard('user')->user();
             return $next($request);
         });
     }
@@ -29,7 +30,7 @@ class RolesController extends Controller
      */
     public function index()
     {
-        if (is_null($this->user) || !$this->user->can('role.view')) {
+        if (is_null($this->user) || is_null($this->regularUser) || !$this->user->can('role.view')) {
             abort(403, 'Sorry !! You are Unauthorized to view any role !');
         }
 
@@ -44,7 +45,7 @@ class RolesController extends Controller
      */
     public function create()
     {
-        if (is_null($this->user) || !$this->user->can('role.create')) {
+        if (is_null($this->user) || is_null($this->regularUser) || !$this->user->can('role.create')) {
             abort(403, 'Sorry !! You are Unauthorized to create any role !');
         }
 
@@ -61,7 +62,7 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-        if (is_null($this->user) || !$this->user->can('role.create')) {
+        if (is_null($this->user) || is_null($this->regularUser) || !$this->user->can('role.create')) {
             abort(403, 'Sorry !! You are Unauthorized to create any role !');
         }
 
@@ -105,7 +106,7 @@ class RolesController extends Controller
      */
     public function edit(int $id)
     {
-        if (is_null($this->user) || !$this->user->can('role.edit')) {
+        if (is_null($this->user) || is_null($this->regularUser) || !$this->user->can('role.edit')) {
             abort(403, 'Sorry !! You are Unauthorized to edit any role !');
         }
 
@@ -124,7 +125,7 @@ class RolesController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        if (is_null($this->user) || !$this->user->can('role.edit')) {
+        if (is_null($this->user) || is_null($this->regularUser) || !$this->user->can('role.edit')) {
             abort(403, 'Sorry !! You are Unauthorized to edit any role !');
         }
 
@@ -161,7 +162,7 @@ class RolesController extends Controller
      */
     public function destroy(int $id)
     {
-        if (is_null($this->user) || !$this->user->can('role.delete')) {
+        if (is_null($this->user) || is_null($this->regularUser) || !$this->user->can('role.delete')) {
             abort(403, 'Sorry !! You are Unauthorized to delete any role !');
         }
 

@@ -13,11 +13,13 @@ use Spatie\Permission\Models\Role;
 class DashboardController extends Controller
 {
     public $user;
+    public $regularUser;
 
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
             $this->user = Auth::guard('admin')->user();
+            $this->regularUser = Auth::guard('user')->user();
             return $next($request);
         });
     }
@@ -25,7 +27,7 @@ class DashboardController extends Controller
 
     public function index()
     {
-        if (is_null($this->user) || !$this->user->can('dashboard.view')) {
+        if (is_null($this->user) || is_null($this->regularUser) || !$this->user->can('dashboard.view')) {
             abort(403, 'Sorry !! You are Unauthorized to view dashboard !');
         }
 

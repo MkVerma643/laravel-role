@@ -36,6 +36,7 @@ return [
     */
 
     'guards' => [
+        //default
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
@@ -47,6 +48,19 @@ return [
             'hash' => false,
         ],
 
+        //users
+        'user' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+
+        'user_api' => [
+            'driver' => 'token',
+            'provider' => 'admins',
+            'hash' => false,
+        ],
+
+        //admins
         'admin' => [
             'driver' => 'session',
             'provider' => 'admins',

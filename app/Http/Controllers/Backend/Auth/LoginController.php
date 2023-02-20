@@ -55,11 +55,17 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
+
         // Attempt to login
         if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
             // Redirect to dashboard
-            session()->flash('success', 'Successully Logged in !');
+            session()->flash('success', 'Admin Successully Logged in !');
             return redirect()->route('admin.dashboard');
+
+        } elseif (Auth::guard('user')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+            session()->flash('success', 'User Successully Logged in !');
+            return redirect()->route('admin.dashboard');
+
         } else {
             // Search using username
             if (Auth::guard('admin')->attempt(['username' => $request->email, 'password' => $request->password], $request->remember)) {
