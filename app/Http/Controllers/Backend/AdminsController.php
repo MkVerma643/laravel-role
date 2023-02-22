@@ -12,13 +12,11 @@ use Spatie\Permission\Models\Role;
 class AdminsController extends Controller
 {
     public $user;
-    public $regularUser;
 
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
             $this->user = Auth::guard('admin')->user();
-            $this->regularUser = Auth::guard('user')->user();
             return $next($request);
         });
     }
@@ -30,7 +28,7 @@ class AdminsController extends Controller
      */
     public function index()
     {
-        if (is_null($this->user) || is_null($this->regularUser) || !$this->user->can('admin.view')) {
+        if (is_null($this->user) || !$this->user->can('admin.view')) {
             abort(403, 'Sorry !! You are Unauthorized to view any admin !');
         }
 
@@ -45,7 +43,7 @@ class AdminsController extends Controller
      */
     public function create()
     {
-        if (is_null($this->user) || is_null($this->regularUser) || !$this->user->can('admin.create')) {
+        if (is_null($this->user) || !$this->user->can('admin.create')) {
             abort(403, 'Sorry !! You are Unauthorized to create any admin !');
         }
 
@@ -61,7 +59,7 @@ class AdminsController extends Controller
      */
     public function store(Request $request)
     {
-        if (is_null($this->user) || is_null($this->regularUser) || !$this->user->can('admin.create')) {
+        if (is_null($this->user) || !$this->user->can('admin.create')) {
             abort(403, 'Sorry !! You are Unauthorized to create any admin !');
         }
 
@@ -108,7 +106,7 @@ class AdminsController extends Controller
      */
     public function edit(int $id)
     {
-        if (is_null($this->user) || is_null($this->regularUser) || !$this->user->can('admin.edit')) {
+        if (is_null($this->user) || !$this->user->can('admin.edit')) {
             abort(403, 'Sorry !! You are Unauthorized to edit any admin !');
         }
 
@@ -126,7 +124,7 @@ class AdminsController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        if (is_null($this->user) || is_null($this->regularUser) || !$this->user->can('admin.edit')) {
+        if (is_null($this->user) || !$this->user->can('admin.edit')) {
             abort(403, 'Sorry !! You are Unauthorized to edit any admin !');
         }
 
@@ -171,7 +169,7 @@ class AdminsController extends Controller
      */
     public function destroy(int $id)
     {
-        if (is_null($this->user) || is_null($this->regularUser) || !$this->user->can('admin.delete')) {
+        if (is_null($this->user) || !$this->user->can('admin.delete')) {
             abort(403, 'Sorry !! You are Unauthorized to delete any admin !');
         }
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use App\Models\Admin;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
@@ -37,7 +38,6 @@ class RolePermissionSeeder extends Seeder
 
         // Permission List passed as array[]
         $permissions = [
-
             [
                 'group_name' => 'dashboard',
                 'permissions' => [
@@ -82,11 +82,11 @@ class RolePermissionSeeder extends Seeder
                 'group_name' => 'user',
                 'permissions' => [
                     // user Permissions
-                    'user.create',
-                    'user.view',
-                    'user.edit',
-                    'user.delete',
-                    'user.approve',
+                    'users.create',
+                    'users.view',
+                    'users.edit',
+                    'users.delete',
+                    'users.approve',
                 ]
             ],
             [
@@ -136,14 +136,12 @@ class RolePermissionSeeder extends Seeder
 
         // Do same for the Super Admin guard for tutorial purposes
         $roleSuperAdmin = Role::create(['name' => 'superAdmin', 'guard_name' => 'admin']);
-
         // Do same for the Master Admin guard for tutorial purposes
         $roleMasterAdmin = Role::create(['name' => 'masterAdmin', 'guard_name' => 'admin']);
-
         // Do same for the Admin guard for tutorial purposes
         $roleAdmin = Role::create(['name' => 'admin', 'guard_name' => 'admin']);
 
-        // Create and Assign Permissions
+        // Create and Assign Permissions for Admin Users
         for ($i = 0; $i < count($permissions); $i++) {
             $permissionGroup = $permissions[$i]['group_name'];
             for ($j = 0; $j < count($permissions[$i]['permissions']); $j++) {
@@ -159,23 +157,42 @@ class RolePermissionSeeder extends Seeder
                 $permission->assignRole($roleAdmin);
             }
         }
-
         // Assign super admin role permission to superadmin user
         $superAdmin = Admin::where('username', 'superAdmin')->first();
         if ($superAdmin) {
             $superAdmin->assignRole($roleSuperAdmin);
         }
-
-         // Assign admin role permission to admin user
-         $masterAdmin = Admin::where('username', 'masterAdmin')->first();
-         if ($masterAdmin) {
-             $masterAdmin->assignRole($roleMasterAdmin);
-         }
-
+        // Assign admin role permission to admin user
+        $masterAdmin = Admin::where('username', 'masterAdmin')->first();
+        if ($masterAdmin) {
+            $masterAdmin->assignRole($roleMasterAdmin);
+        }
         // Assign admin role permission to admin user
         $admin = Admin::where('username', 'admin')->first();
         if ($admin) {
             $admin->assignRole($roleAdmin);
+        }
+
+
+
+        // Do same for the User guard for tutorial purposes
+        $userRole = Role::create(['name' => 'user', 'guard_name' => 'user']);
+
+        // Create and Assign Permissions for User
+        for ($i = 0; $i < count($permissions); $i++) {
+            $permissionGroup = $permissions[$i]['group_name'];
+            for ($j = 0; $j < count($permissions[$i]['permissions']); $j++) {
+                // Create Permission
+                $permission = Permission::create(['name' => $permissions[$i]['permissions'][$j], 'group_name' => $permissionGroup, 'guard_name' => 'user']);
+                //For User
+                $userRole->givePermissionTo($permission);
+                $permission->assignRole($userRole);
+            }
+        }
+        // Assign user role permission to user
+        $user = User::where('email', 'user@user.com')->first();
+        if ($user) {
+            $user->assignRole($userRole);
         }
 
     }

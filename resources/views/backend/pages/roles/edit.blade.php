@@ -44,13 +44,23 @@ Role Edit - Admin Panel
                 <div class="card-body">
                     <h4 class="header-title">Edit Role</h4>
                     @include('backend.layouts.partials.messages')
-                    
+
                     <form action="{{ route('admin.roles.update', $role->id) }}" method="POST">
                         @method('PUT')
                         @csrf
                         <div class="form-group">
                             <label for="name">Role Name</label>
                             <input type="text" class="form-control" id="name" value="{{ $role->name }}" name="name" placeholder="Enter a Role Name">
+                            <br>
+                            <div class="form-group float-right">
+                                <label for="guard">Select Guard
+                                <select name="guard" id="guard" class="form-control select2">
+                                    <?php $guards = array_keys(config('auth.guards')); ?>
+                                    @foreach ($guards as $guard)
+                                        <option value="{{ $guard }}">{{ $guard }}</option>
+                                    @endforeach
+                                </select></label>
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -68,7 +78,7 @@ Role Edit - Admin Panel
                                         $permissions = App\User::getpermissionsByGroupName($group->name);
                                         $j = 1;
                                     @endphp
-                                    
+
                                     <div class="col-3">
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="{{ $i }}Management" value="{{ $group->name }}" onclick="checkPermissionByGroup('role-{{ $i }}-management-checkbox', this)" {{ App\User::roleHasPermissions($role, $permissions) ? 'checked' : '' }}>
@@ -77,7 +87,7 @@ Role Edit - Admin Panel
                                     </div>
 
                                     <div class="col-9 role-{{ $i }}-management-checkbox">
-                                       
+
                                         @foreach ($permissions as $permission)
                                             <div class="form-check">
                                                 <input type="checkbox" class="form-check-input" onclick="checkSinglePermission('role-{{ $i }}-management-checkbox', '{{ $i }}Management', {{ count($permissions) }})" name="permissions[]" {{ $role->hasPermissionTo($permission->name) ? 'checked' : '' }} id="checkPermission{{ $permission->id }}" value="{{ $permission->name }}">
@@ -98,7 +108,7 @@ Role Edit - Admin Panel
             </div>
         </div>
         <!-- data table end -->
-        
+
     </div>
 </div>
 @endsection

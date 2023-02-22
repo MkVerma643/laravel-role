@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -27,7 +27,13 @@ class DashboardController extends Controller
 
     public function index()
     {
-        if (is_null($this->user) || is_null($this->regularUser) || !$this->user->can('dashboard.view')) {
+        $user = $this->user;
+        $regularUser = $this->regularUser;
+
+        if (!$user || !$user->can('dashboard.view')) {
+            abort(403, 'Sorry !! You are Unauthorized to view dashboard !');
+        }
+        if (!$regularUser || !$regularUser->can('dashboard.view')) {
             abort(403, 'Sorry !! You are Unauthorized to view dashboard !');
         }
 

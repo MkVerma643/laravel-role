@@ -44,17 +44,26 @@ Role Create - Admin Panel
                 <div class="card-body">
                     <h4 class="header-title">Create New Role</h4>
                     @include('backend.layouts.partials.messages')
-                    
+
                     <form action="{{ route('admin.roles.store') }}" method="POST">
                         @csrf
                         <div class="form-group">
                             <label for="name">Role Name</label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="Enter a Role Name">
+                            <br>
+                            <div class="form-group float-right">
+                                <label for="guard">Select Guard
+                                <select name="guard" id="guard" class="form-control select2">
+                                    <?php $guards = array_keys(config('auth.guards')); ?>
+                                    @foreach ($guards as $guard)
+                                        <option value="{{ $guard }}">{{ $guard }}</option>
+                                    @endforeach
+                                </select></label>
+                            </div>
                         </div>
 
                         <div class="form-group">
                             <label for="name">Permissions</label>
-
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="checkPermissionAll" value="1">
                                 <label class="form-check-label" for="checkPermissionAll">All</label>
@@ -89,17 +98,17 @@ Role Create - Admin Panel
                                 @php  $i++; @endphp
                             @endforeach
 
-                            
+
                         </div>
-                       
-                        
+
+
                         <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Save Role</button>
                     </form>
                 </div>
             </div>
         </div>
         <!-- data table end -->
-        
+
     </div>
 </div>
 @endsection

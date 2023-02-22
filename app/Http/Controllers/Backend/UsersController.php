@@ -30,6 +30,10 @@ class UsersController extends Controller
      */
     public function index()
     {
+        if (is_null($this->user) || !$this->user->can('users.view')) {
+            abort(403, 'Sorry !! You are Unauthorized to view any user !');
+        }
+
         $users = User::all();
         return view('backend.pages.users.index', compact('users'));
     }
@@ -41,6 +45,10 @@ class UsersController extends Controller
      */
     public function create()
     {
+        if (is_null($this->user) || !$this->user->can('users.create')) {
+            abort(403, 'Sorry !! You are Unauthorized to create any user !');
+        }
+
         $roles  = Role::all();
         return view('backend.pages.users.create', compact('roles'));
     }
@@ -53,6 +61,10 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        if (is_null($this->user) || !$this->user->can('users.create')) {
+            abort(403, 'Sorry !! You are Unauthorized to create any user !');
+        }
+
         // Validation Data
         $request->validate([
             'name' => 'required|max:50',
@@ -72,7 +84,7 @@ class UsersController extends Controller
         }
 
         session()->flash('success', 'User has been created !!');
-        return redirect()->route('admin.users.index');
+        return redirect()->route('users.index');
     }
 
     /**
@@ -94,6 +106,10 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
+        if (is_null($this->user) || !$this->user->can('users.edit')) {
+            abort(403, 'Sorry !! You are Unauthorized to edit any user !');
+        }
+
         $user = User::find($id);
         $roles  = Role::all();
         return view('backend.pages.users.edit', compact('user', 'roles'));
@@ -108,6 +124,10 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (is_null($this->user) || !$this->user->can('users.edit')) {
+            abort(403, 'Sorry !! You are Unauthorized to edit any user !');
+        }
+
         // Create New User
         $user = User::find($id);
 
@@ -143,6 +163,10 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
+        if (is_null($this->user) || !$this->user->can('users.delete')) {
+            abort(403, 'Sorry !! You are Unauthorized to delete any user !');
+        }
+
         $user = User::find($id);
         if (!is_null($user)) {
             $user->delete();
