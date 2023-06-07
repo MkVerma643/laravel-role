@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
         $User = User::where('email', 'mukesh@gmail.com')->first();
         if (is_null($User)) {
             $User = new User();
-            $User->name = "Mukesh Verma";
+            $User->name = "Mukesh";
             $User->email = "mukesh@gmail.com";
             $User->password = Hash::make('user@125');
             $User->save();
@@ -47,7 +47,7 @@ class UserSeeder extends Seeder
         $Registrar = User::where('email', 'registrar@gmail.com')->first();
         if (is_null($Registrar)) {
             $Registrar = new User();
-            $Registrar->name = "registrar";
+            $Registrar->name = "Registrar";
             $Registrar->email = "registrar@gmail.com";
             $Registrar->password = Hash::make('user@125');
             $Registrar->save();
@@ -87,7 +87,7 @@ class UserSeeder extends Seeder
         $CollegeCoordinator = User::where('email', 'collegeCoordinator@gmail.com')->first();
         if (is_null($CollegeCoordinator)) {
             $CollegeCoordinator = new User();
-            $CollegeCoordinator->name = "College Coordinator";
+            $CollegeCoordinator->name = "Coordinator";
             $CollegeCoordinator->email = "collegeCoordinator@gmail.com";
             $CollegeCoordinator->password = Hash::make('user@125');
             $CollegeCoordinator->save();

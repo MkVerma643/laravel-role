@@ -20,7 +20,7 @@ class RolePermissionSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+        public function run()
     {
 
         /**
@@ -162,7 +162,7 @@ class RolePermissionSeeder extends Seeder
         if ($superAdmin) {
             $superAdmin->assignRole($roleSuperAdmin);
         }
-        // Assign admin role permission to admin user
+        // Assign admin role permission to master user
         $masterAdmin = Admin::where('username', 'masterAdmin')->first();
         if ($masterAdmin) {
             $masterAdmin->assignRole($roleMasterAdmin);
